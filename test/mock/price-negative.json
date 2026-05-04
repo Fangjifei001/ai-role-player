@@ -1,0 +1,29 @@
+[
+  {
+    "AI assistant": "I've been looking at your pricing structure, and I have to be honest—I'm struggling to see how this justifies the premium you're asking for. What makes your solution worth the additional investment compared to what we already have in place?",
+    "user": "Hi, thanks for taking the time today. I'd love to walk you through our solution."
+  },
+  {
+    "AI assistant": "Sure, I'm willing to hear you out. But I'll be upfront—I need concrete data showing how this reduces costs or increases efficiency, not just features. Can you start there?",
+    "user": "I understand. Our product offers a lot of great features that make it worth the investment."
+  },
+  {
+    "AI assistant": "What great features specifically translate into savings or revenue for us? I'm not interested in bells and whistles—I need practical outcomes. Can you give me a clear example?",
+    "user": "Well, we have analytics and automation features that help improve efficiency."
+  },
+  {
+    "AI assistant": "Analytics and automation can mean a lot of different things. Walk me through one specific process your tool would automate for my team, and how that actually cuts costs. Because right now, I'm comparing this to our current system and a couple of cheaper alternatives.",
+    "user": "It really depends on how you use it. Many of our customers find it helpful."
+  },
+  {
+    "AI assistant": "That's a bit vague for me. How about this—can you share a case study from a company of a similar size and industry? I need to see real numbers, not just general claims. Otherwise, this feels like a lot of risk for an uncertain return.",
+    "user": "I don't have specific numbers right now, but generally it improves workflows."
+  },
+  {
+    "AI assistant": "I appreciate the conversation, but without concrete data, I'm not comfortable moving forward with a premium-priced solution. A general improvement doesn't justify the cost difference. Maybe circle back when you can share some specific ROI figures relevant to my industry.",
+    "user": "I understand. Let me know if you change your mind"
+  }, 
+  {
+    "AI assistant": "I will. But honestly, that response doesn't inspire much confidence. If you want to win over decision-makers like me, you'll need more than that next time. Thanks for your time."
+  }
+]

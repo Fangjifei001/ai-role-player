@@ -1,0 +1,110 @@
+/* Segmented — antd-like light chrome next to default theme */
+.voice-panel-segmented.ant-segmented {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.voice-panel-segmented.ant-segmented .ant-segmented-item {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.voice-panel-segmented.ant-segmented .ant-segmented-item-selected {
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.88);
+}
+
+.voice-panel-segmented.ant-segmented .ant-segmented-thumb {
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.avatar-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.15);
+}
+
+.avatar-inner {
+    font-size: 30px;
+    filter: drop-shadow(0 0 6px #22D3EE);
+}
+
+.waveform-ring {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 1.5px dashed #22D3EE;
+    opacity: 0.5;
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Three dots under AI avatar — typing rhythm; keeps layout when switching to bars */
+.ai-output-typing-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-output-typing-dots span {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #22d3ee;
+    animation: blink 1.2s infinite;
+}
+
+.ai-output-typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.ai-output-typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.typing-dots span {
+    animation: blink 1.2s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
