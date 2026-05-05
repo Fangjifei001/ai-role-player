@@ -5,8 +5,6 @@ A **low-latency, voice-driven** AI simulator that recreates realistic sales conv
 
 Designed for **high interactivity, real-time feedback, and configurable training scenarios**.
 
----
-
 ## Overview
 This application simulates real-world sales conversations by allowing users to:
 - Speak to an AI-powered customer persona
@@ -14,8 +12,6 @@ This application simulates real-world sales conversations by allowing users to:
 - Get structured coaching feedback after each session
 - Switch between different AI models (DeepSeek / OpenAI)
 - Configure scenarios and personas via an admin console
-
----
 
 ## Routes
 
@@ -34,8 +30,6 @@ Server APIs (not App Router pages):
 |------|---------|
 | `POST /api/session/chat` | Session chat: streams model text for the posted message list. |
 | `POST /api/feedback` | Builds sales-coach-style structured feedback JSON from a session snapshot. |
-
----
 
 ## Local development
 
@@ -66,8 +60,6 @@ npm run lint
 npm run build
 ```
 
----
-
 ## Tech stack
 
 | Area | Stack |
@@ -79,8 +71,6 @@ npm run build
 | AI | **Vercel AI SDK** (`ai`), `@ai-sdk/deepseek` / `@ai-sdk/openai` |
 | Voice | STT (Speech-to-Text), TTS (Text-to-Speech) |
 | Other | **lucide-react**, **cmdk**; **cross-env** on dev/start scripts for stable local DNS |
-
----
 
 ## Architecture
 
@@ -118,8 +108,6 @@ External
 - Non-blocking UI patterns
 - Interruptible audio playback
 - Progressive transcript rendering
-
----
 
 ## Directory layout (main areas)
 
