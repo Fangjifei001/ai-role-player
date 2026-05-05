@@ -62,7 +62,7 @@ npm run build
 ```
 
 ### Production
-Visit Here[https://ai-role-player-rosy.vercel.app/]
+Visit [Here](https://ai-role-player-rosy.vercel.app/)
 
 ## Tech stack
 
