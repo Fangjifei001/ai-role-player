@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { BarcodeOutlined, EditTwoTone, EyeOutlined, SaveOutlined, UserOutlined } from "@ant-design/icons";
+import { BarcodeOutlined, EyeOutlined, SaveOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Layout, Menu, Space, Typography, message } from "antd";
+import { AppBrandLogo } from "@/components/AppBrandLogo";
 import {
   getAdminRuntimeData,
   getServerAdminRuntimeSnapshot,
@@ -85,7 +86,7 @@ function AdminAppHeader({
     <header className="flex w-full shrink-0 items-center border-b border-zinc-200 bg-white">
       <div className="w-[220px] shrink-0 border-r border-zinc-200 px-5 py-4">
         <Space align="center">
-          <EditTwoTone style={{ color: "#4f46e5", fontSize: "22px", fontWeight: "bold" }} />
+          <AppBrandLogo />
           <Title level={4} className="!mb-0 !text-zinc-800 !text-xl">
             AI Role Player
           </Title>
@@ -309,7 +310,7 @@ export default function AdminPage() {
 
   if (selectedNav === "scenarios" && !draft) {
     return (
-      <Layout className="flex min-h-screen flex-col bg-[#f5f7fb]">
+      <Layout className="flex min-h-screen flex-col bg-app-shell">
         <AdminAppHeader />
         <main className="flex-1 p-6 text-sm">No scenario data available.</main>
       </Layout>
@@ -317,7 +318,7 @@ export default function AdminPage() {
   }
 
   return (
-    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f5f7fb]">
+    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-app-shell">
       {contextHolder}
       <AdminAppHeader
         {...adminHeaderContext}

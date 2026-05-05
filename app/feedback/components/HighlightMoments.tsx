@@ -22,15 +22,21 @@ export function HighlightMoments({ moments }: HighlightMomentsProps) {
       className="!rounded-xl !border-zinc-200/90 !shadow-sm"
       title={<span className="text-zinc-900">Highlighted Moments</span>}
       extra={
-        <Button type="link" className="!text-indigo-600">
+        <Button type="link" className="!text-brand">
           View Full Transcript
         </Button>
       }
     >
+      {moments.length === 0 ? (
+        <Text type="secondary" className="block py-6 text-center text-sm leading-relaxed">
+          No transcript moments were highlighted for this session. A longer or more balanced practice usually
+          gives the coach clearer lines to reference—try again when you can.
+        </Text>
+      ) : (
       <ul className="space-y-4">
-        {moments.map((h) => (
+        {moments.map((h, index) => (
           <li
-            key={`${h.timestamp}-${h.message.slice(0, 24)}`}
+            key={`highlight-moment-${index}-${h.timestamp}-${h.type}-${h.message}`}
             className="flex gap-3 rounded-xl border border-zinc-100 bg-zinc-50/80 px-4 py-3"
           >
             <div className="shrink-0">
@@ -73,6 +79,7 @@ export function HighlightMoments({ moments }: HighlightMomentsProps) {
           </li>
         ))}
       </ul>
+      )}
     </Card>
   );
 }

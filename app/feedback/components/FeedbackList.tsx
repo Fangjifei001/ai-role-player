@@ -26,8 +26,8 @@ export function FeedbackList({ strengths, improvements }: FeedbackListProps) {
         }
       >
         <ul className="space-y-3">
-          {strengths.map((line) => (
-            <li key={line} className="flex gap-2 text-sm text-zinc-700">
+          {strengths.map((line, i) => (
+            <li key={`strength-${i}-${line.slice(0, 64)}`} className="flex gap-2 text-sm text-zinc-700">
               <CheckCircleFilled className="mt-0.5 shrink-0" style={{ color: "#16a34a" }} />
               <span>{line}</span>
             </li>
@@ -49,8 +49,8 @@ export function FeedbackList({ strengths, improvements }: FeedbackListProps) {
         }
       >
         <ul className="space-y-3">
-          {improvements.map((line) => (
-            <li key={line} className="flex gap-2 text-sm text-zinc-700">
+          {improvements.map((line, i) => (
+            <li key={`improve-${i}-${line.slice(0, 64)}`} className="flex gap-2 text-sm text-zinc-700">
               <ExclamationCircleFilled className="mt-0.5 shrink-0" style={{ color: "#f97316" }} />
               <span>{line}</span>
             </li>

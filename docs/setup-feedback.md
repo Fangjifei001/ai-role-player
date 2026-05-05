@@ -154,3 +154,47 @@ Add:
 Do NOT change UI structure.
 Keep code modular and production-ready.
 Avoid unnecessary abstraction.
+
+## Step 4 — Loading / Skeleton
+Add loading UI.
+
+Requirements:
+- skeleton for:
+  - score card
+  - lists
+  - highlights
+
+Do NOT use spinner only.
+Use skeleton blocks.
+
+Keep code modular and production-ready.
+Avoid unnecessary abstraction.
+
+## Step 5 - Add Export
+Add export functionality.
+
+Requirements:
+- button: "Export Transcript"
+- copy transcript to clipboard
+
+Optional:
+- download JSON
+
+Keep implementation simple.
+Keep code modular and production-ready.
+Avoid unnecessary abstraction.
+
+## Step 6 - Enhance the user experience
+Enhance Highlight Moments.
+
+Feature:
+- clicking a moment scrolls to that message in transcript
+
+Assume transcript exists.
+
+Add:
+- scrollIntoView
+
+Keep it simple.
+
+

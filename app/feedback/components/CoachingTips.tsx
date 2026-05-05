@@ -18,19 +18,19 @@ export function CoachingTips({ tips }: CoachingTipsProps) {
       <div className="grid gap-3 sm:grid-cols-2">
         {tips.map((tip, i) => (
           <Card
-            key={tip.title}
+            key={`coaching-${i}-${tip.title}`}
             size="small"
-            className="!rounded-xl !border-violet-200/80 !bg-violet-50/50 !shadow-sm"
+            className="!rounded-xl !border-brand-border/80 !bg-brand-surface/50 !shadow-sm"
           >
             <div className="flex gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-400 text-sm font-bold text-white">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand text-sm font-bold text-white">
                 {i + 1}
               </span>
               <div className="min-w-0">
-                <Text strong className="text-violet-950">
+                <Text strong className="text-zinc-900">
                   {tip.title}
                 </Text>
-                <Paragraph className="!mb-0 !mt-1 text-sm text-violet-900/80">{tip.description}</Paragraph>
+                <Paragraph className="!mb-0 !mt-1 text-sm text-zinc-700">{tip.description}</Paragraph>
               </div>
             </div>
           </Card>

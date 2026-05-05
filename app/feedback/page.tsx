@@ -5,33 +5,36 @@ import {
   CalendarOutlined,
   ClockCircleOutlined,
   CommentOutlined,
-  DownloadOutlined,
   FileTextOutlined,
-  MessageOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Alert, Avatar, Button, Card, Layout, Menu, Space, Spin, Typography } from "antd";
+import { Alert, Avatar, Button, Card, Layout, Menu, Space, Typography } from "antd";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AppBrandLogo } from "@/components/AppBrandLogo";
 import {
   clearFeedbackSnapshotFromSessionStorage,
   readFeedbackSnapshotFromSessionStorage,
   type FeedbackSessionSnapshot,
 } from "@/lib/feedback/feedback-session-snapshot";
 import type { FeedbackResult } from "@/lib/types/feedback-result";
+import { FeedbackExportButtons } from "./components/FeedbackExportButtons";
 import { CoachingTips } from "./components/CoachingTips";
 import { FeedbackList } from "./components/FeedbackList";
+import { FeedbackListSkeleton } from "./components/FeedbackListSkeleton";
 import { FeedbackSummary } from "./components/FeedbackSummary";
+import { FeedbackSummarySkeleton } from "./components/FeedbackSummarySkeleton";
 import { HighlightMoments } from "./components/HighlightMoments";
+import { HighlightMomentsSkeleton } from "./components/HighlightMomentsSkeleton";
 
 const { Sider, Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
 
 const META_TEMPLATE = [
-  { label: "Scenario" as const, Icon: FileTextOutlined, iconColor: "#4f46e5", circleClass: "bg-indigo-100" },
-  { label: "Persona" as const, Icon: UserOutlined, iconColor: "#7c3aed", circleClass: "bg-violet-100" },
-  { label: "Duration" as const, Icon: ClockCircleOutlined, iconColor: "#0891b2", circleClass: "bg-cyan-100" },
-  { label: "Date" as const, Icon: CalendarOutlined, iconColor: "#d97706", circleClass: "bg-amber-100" },
+  { label: "Scenario" as const, Icon: FileTextOutlined, iconColor: "var(--brand-primary)", circleClass: "bg-brand-muted" },
+  { label: "Persona" as const, Icon: UserOutlined, iconColor: "#be123c", circleClass: "bg-rose-100" },
+  { label: "Duration" as const, Icon: ClockCircleOutlined, iconColor: "var(--brand-accent)", circleClass: "bg-red-100" },
+  { label: "Date" as const, Icon: CalendarOutlined, iconColor: "#c2410c", circleClass: "bg-orange-100" },
 ] as const;
 
 type MetaRow = (typeof META_TEMPLATE)[number] & { value: string };
@@ -130,11 +133,11 @@ export default function FeedbackPage() {
   }, []);
 
   return (
-    <Layout className="flex min-h-screen min-h-0 flex-col bg-[#f5f7fb]">
+    <Layout className="flex min-h-screen min-h-0 flex-col bg-app-shell">
       <header className="flex w-full shrink-0 items-center border-b border-zinc-200 bg-white">
         <div className="w-[220px] shrink-0 border-r border-zinc-200 px-5 py-4">
           <Space align="center">
-            <MessageOutlined style={{ color: "#4f46e5", fontSize: "22px", fontWeight: "bold" }} />
+            <AppBrandLogo />
             <Title level={4} className="!mb-0 !text-zinc-800 !text-xl">
               AI Role Player
             </Title>
@@ -144,9 +147,7 @@ export default function FeedbackPage() {
           <Title level={4} className="!mb-0 !truncate !text-lg !font-semibold !text-zinc-900">
             Session Feedback
           </Title>
-          <Button type="primary" icon={<DownloadOutlined />}>
-            Export Report
-          </Button>
+          <FeedbackExportButtons transcript={snapshot?.transcript ?? ""} />
         </div>
       </header>
 
@@ -184,7 +185,7 @@ export default function FeedbackPage() {
             <div className="mt-auto border-t border-zinc-100 px-5 py-6">
               <Space align="center" orientation="vertical" size={4} className="!items-start">
                 <Space align="center">
-                  <Avatar size="small" className="!bg-indigo-100 !text-indigo-700">
+                  <Avatar size="small" className="!bg-brand-muted !text-brand-icon">
                     JS
                   </Avatar>
                   <div className="leading-tight">
@@ -248,7 +249,7 @@ export default function FeedbackPage() {
                 className="!mb-8"
                 type="error"
                 showIcon
-                message="Could not load feedback"
+                title="Could not load feedback"
                 description={error}
                 action={
                   <Space orientation="vertical">
@@ -262,9 +263,15 @@ export default function FeedbackPage() {
             ) : null}
 
             {loading ? (
-              <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 py-10">
-                <Spin size="large" />
-                <Text type="secondary">Generating feedback from your session…</Text>
+              <div
+                className="flex flex-col gap-0 pb-2"
+                aria-busy="true"
+                aria-live="polite"
+                aria-label="Loading session feedback"
+              >
+                <FeedbackSummarySkeleton />
+                <FeedbackListSkeleton />
+                <HighlightMomentsSkeleton />
               </div>
             ) : null}
 

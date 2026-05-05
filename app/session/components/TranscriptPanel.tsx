@@ -94,7 +94,7 @@ export function TranscriptPanel({ personaName, sessionState, onClearConversation
             </div>
           ) : (
             <div key={row.id} className="flex flex-row-reverse gap-3">
-              <Avatar size={36} className="!shrink-0 !bg-indigo-600 !text-sm !text-white">
+              <Avatar size={36} className="!shrink-0 !bg-brand !text-sm !text-white">
                 JS
               </Avatar>
               <div className="min-w-0 flex-1 text-right">
@@ -106,7 +106,7 @@ export function TranscriptPanel({ personaName, sessionState, onClearConversation
                     {formatTranscriptTime(row.timestamp)}
                   </Text>
                 </div>
-                <div className="mt-1.5 ml-auto w-fit max-w-[calc(100%-48px)] whitespace-pre-wrap break-words rounded-2xl rounded-tr-sm bg-indigo-50 px-3.5 py-2.5 text-left text-sm leading-relaxed text-zinc-800">
+                <div className="mt-1.5 ml-auto w-fit max-w-[calc(100%-48px)] whitespace-pre-wrap break-words rounded-2xl rounded-tr-sm bg-brand-surface px-3.5 py-2.5 text-left text-sm leading-relaxed text-zinc-800">
                   {row.text}
                 </div>
               </div>

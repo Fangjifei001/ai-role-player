@@ -86,7 +86,7 @@ export function PersonaForm({
                       key={persona.id}
                       className={`flex items-stretch gap-0.5 rounded-xl border transition ${
                         active
-                          ? "border-indigo-200 bg-indigo-50"
+                          ? "border-brand-border bg-brand-surface"
                           : "border-transparent bg-white hover:border-zinc-200 hover:bg-zinc-50"
                       }`}
                     >

@@ -15,10 +15,10 @@ import {
   AudioOutlined,
   BankOutlined,
   ClockCircleOutlined,
-  MessageOutlined,
   StopOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Card, Layout, Menu, Space, Typography, message } from "antd";
+import { AppBrandLogo } from "@/components/AppBrandLogo";
 import {
   writeFeedbackSnapshotToSessionStorage,
 } from "@/lib/feedback/feedback-session-snapshot";
@@ -190,7 +190,7 @@ function SessionPageInner() {
       personaDescription: buildPersonaDescriptionForFeedback(persona),
       transcript,
       durationLabel,
-      dateLabel: new Date().toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }),
+      dateLabel: new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }),
     });
 
     useSessionStore.getState().setState("ended");
@@ -199,7 +199,7 @@ function SessionPageInner() {
 
   if (!selectionValid || !scenario || !persona) {
     return (
-      <Layout className="min-h-screen bg-[#f5f7fb]">
+      <Layout className="min-h-screen bg-app-shell">
         <Content className="flex items-center justify-center p-10">
           <Text type="secondary">Returning to dashboard…</Text>
         </Content>
@@ -208,12 +208,12 @@ function SessionPageInner() {
   }
 
   return (
-    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f5f7fb]">
+    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-app-shell">
       {contextHolder}
       <header className="flex w-full shrink-0 items-center border-b border-zinc-200 bg-white">
         <div className="w-[220px] shrink-0 border-r border-zinc-200 px-5 py-4">
           <Space align="center">
-            <MessageOutlined style={{ color: "#4f46e5", fontSize: "22px", fontWeight: "bold" }} />
+            <AppBrandLogo />
             <Title level={4} className="!mb-0 !text-zinc-800 !text-xl">
               AI Role Player
             </Title>
@@ -273,7 +273,7 @@ function SessionPageInner() {
             />
             <div className="mt-auto border-t border-zinc-100 px-5 py-6">
               <Space align="center">
-                <Avatar size="small" className="!bg-indigo-100 !text-indigo-700">
+                <Avatar size="small" className="!bg-brand-muted !text-brand-icon">
                   JS
                 </Avatar>
                 <Text strong>Jane Smith</Text>
@@ -318,7 +318,7 @@ function SessionPageInner() {
 
 function SessionFallback() {
   return (
-    <Layout className="min-h-screen bg-[#f5f7fb]">
+    <Layout className="min-h-screen bg-app-shell">
       <Content className="flex items-center justify-center p-10">
         <Text type="secondary">Loading session…</Text>
       </Content>

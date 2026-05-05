@@ -5,6 +5,31 @@ import type {
   FeedbackResultSummary,
 } from "@/lib/types/feedback-result";
 
+/** Shown when the model returns no strengths—avoids failing the whole feedback response. */
+const FALLBACK_STRENGTH =
+  "We did not surface clear, repeatable strengths in this transcript yet—and that is okay. Short or difficult practices often look like this. Keep going: pick one skill to rehearse next time (for example, a concise opener, one deeper discovery question, or a clean recap before you propose anything). Consistency turns effort into visible wins.";
+
+const FALLBACK_IMPROVEMENT =
+  "Treat this session as a baseline: choose one concrete behavior to practice next time—such as labeling emotion, handling one objection with evidence, or confirming next steps—and measure whether you did it once before you raise the bar.";
+
+const FALLBACK_COACHING_PAD: FeedbackResultCoachingTip[] = [
+  {
+    title: "Start with a clear intent",
+    description:
+      "Open with why you are asking your first question and what you want to learn. It grounds the conversation and makes your follow-ups feel purposeful rather than scripted.",
+  },
+  {
+    title: "Check understanding before you pitch",
+    description:
+      "Briefly restate what you heard and ask a quick confirmation before you move to solutions. It catches misreads early and lowers unnecessary friction.",
+  },
+  {
+    title: "Own a next step",
+    description:
+      "Close with one specific action you will take (what, when, how you will follow up). Momentum survives practice when the conversation ends with clarity, not ambiguity.",
+  },
+];
+
 function extractJsonObject(raw: string): string {
   const t = raw.trim();
   const fence = /^```(?:json)?\s*\r?\n?([\s\S]*?)\r?\n?```\s*$/im.exec(t);
@@ -66,7 +91,8 @@ function normalizeHighlightMoments(raw: unknown): FeedbackResultHighlightMoment[
 }
 
 /**
- * Parses model output into {@link FeedbackResult}. Throws with a short message if invalid.
+ * Parses model output into {@link FeedbackResult}. Throws only for malformed JSON or missing summary/score.
+ * Empty strengths/improvements are filled with supportive defaults; coaching tips are padded to three generic items if needed.
  */
 export function parseFeedbackResultFromModelText(raw: string): FeedbackResult {
   let data: unknown;
@@ -96,22 +122,39 @@ export function parseFeedbackResultFromModelText(raw: string): FeedbackResult {
   const summary: FeedbackResultSummary = { overallAssessment, score };
 
   const strengthsRaw = root.strengths;
-  const strengths = Array.isArray(strengthsRaw)
+  let strengths = Array.isArray(strengthsRaw)
     ? strengthsRaw.map((x) => (typeof x === "string" ? x.trim() : "")).filter(Boolean)
     : [];
-  if (strengths.length < 2) throw new Error("Expected at least 2 strengths.");
+  if (strengths.length === 0) strengths = [FALLBACK_STRENGTH];
 
   const improvementsRaw = root.improvements ?? root.areasToImprove ?? root.gaps;
-  const improvements = Array.isArray(improvementsRaw)
+  let improvements = Array.isArray(improvementsRaw)
     ? improvementsRaw.map((x) => (typeof x === "string" ? x.trim() : "")).filter(Boolean)
     : [];
-  if (improvements.length < 2) throw new Error("Expected at least 2 improvements.");
+  if (improvements.length === 0) improvements = [FALLBACK_IMPROVEMENT];
 
-  const coachingTips = normalizeCoachingTips(root.coachingTips ?? root.coaching_tips);
-  if (coachingTips.length < 3) throw new Error("Expected at least 3 coaching tips.");
+  let coachingTips = normalizeCoachingTips(root.coachingTips ?? root.coaching_tips);
+  if (coachingTips.length < 3) {
+    const titles = new Set(coachingTips.map((t) => t.title));
+    for (const pad of FALLBACK_COACHING_PAD) {
+      if (coachingTips.length >= 3) break;
+      if (!titles.has(pad.title)) {
+        coachingTips.push(pad);
+        titles.add(pad.title);
+      }
+    }
+    let fill = 0;
+    while (coachingTips.length < 3) {
+      fill += 1;
+      coachingTips.push({
+        title: `Practice focus ${fill}`,
+        description:
+          "Short sessions still build habit. Pick one micro-skill, run it once in the next role-play, and reflect on what changed—even a small signal counts as progress.",
+      });
+    }
+  }
 
   const highlightMoments = normalizeHighlightMoments(root.highlightMoments ?? root.highlights ?? root.moments);
-  if (highlightMoments.length < 3) throw new Error("Expected at least 3 highlight moments.");
 
   return { summary, strengths, improvements, coachingTips, highlightMoments };
 }

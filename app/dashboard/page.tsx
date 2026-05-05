@@ -3,16 +3,16 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import {
-  MessageOutlined,
   ClockCircleOutlined,
   InfoCircleOutlined,
   PlayCircleOutlined,
-  SafetyCertificateOutlined,
-  StarOutlined,
+  SafetyCertificateFilled,
+  StarFilled,
   UserOutlined,
   BankOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Card, Layout, Menu, Select, Space, Tag, Typography } from "antd";
+import { AppBrandLogo } from "@/components/AppBrandLogo";
 import {
   clearSessionEntryGate,
   getAdminRuntimeData,
@@ -82,11 +82,11 @@ export default function DashboardPage() {
   }
 
   return (
-    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f5f7fb]">
+    <Layout className="flex h-screen min-h-0 flex-col overflow-hidden bg-app-shell">
       <header className="flex w-full shrink-0 items-center border-b border-zinc-200 bg-white">
         <div className="w-[220px] shrink-0 border-r border-zinc-200 px-5 py-4">
           <Space align="center">
-            <MessageOutlined style={{ color: "#4f46e5", fontSize: "22px", fontWeight: "bold" }} />
+            <AppBrandLogo />
             <Title level={4} className="!mb-0 !text-zinc-800 !text-xl">
               AI Role Player
             </Title>
@@ -101,16 +101,6 @@ export default function DashboardPage() {
               Practice real customer conversations. Improve your skills.
             </Text>
           </div>
-        </div>
-        <div className="flex shrink-0 items-center gap-2 border-l border-zinc-100 px-5 py-3">
-          <Button
-            icon={<SafetyCertificateOutlined style={{ color: "#4f46e5" }} />}
-            onClick={() => router.push("/admin")}
-            size="large"
-            className="!h-10 !rounded-xl !px-4"
-          >
-            Switch to Admin
-          </Button>
         </div>
       </header>
 
@@ -248,61 +238,71 @@ export default function DashboardPage() {
                   });
                   router.push(`/session?${q.toString()}`);
                 }}
-                className="h-12 min-w-56 rounded-xl bg-indigo-600 px-8 hover:!bg-indigo-500"
+                className="h-12 min-w-56 rounded-xl px-8"
               >
                 Start Role Play
               </Button>
             </div>
           </Card>
 
-          <Card className="rounded-2xl" title="Session Summary" styles={{ body: { padding: 0 } }}>
+          <Card
+            className="rounded-2xl"
+            title="Session Summary"
+            styles={{ body: { padding: 0 }, title: { fontSize: 18, fontWeight: 600 } }}
+          >
             {selectedScenario && selectedPersona ? (
               <div className="grid md:grid-cols-3">
-                <div className="border-b border-zinc-100 p-5 md:border-b-0 md:border-r">
+                <div className="flex flex-col gap-5 border-b border-zinc-100 p-5 md:border-b-0 md:border-r">
                   <Space align="center">
                     <Avatar
                       size="small"
-                      style={{ backgroundColor: "#eef2ff", color: "#4f46e5" }}
-                      icon={<SafetyCertificateOutlined />}
+                      style={{ backgroundColor: "var(--brand-primary)", color: "#ffffff" }}
+                      icon={<SafetyCertificateFilled />}
                     />
-                    <Text strong>Scenario Goal(s)</Text>
+                    <Text strong className="text-base md:text-lg">
+                      Scenario Goal(s)
+                    </Text>
                   </Space>
-                  <ul className="mt-3 list-disc space-y-1 pl-5">
+                  <ul className="list-disc space-y-2.5 pl-5 marker:text-[var(--brand-primary)] [&_li]:leading-relaxed [&_li]:text-sm [&_li]:text-zinc-700">
                     {selectedScenario.scenarioGoals.map((goal) => (
                       <li key={goal}>{goal}</li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="border-b border-zinc-100 p-5 md:border-b-0 md:border-r">
+                <div className="flex flex-col gap-5 border-b border-zinc-100 p-5 md:border-b-0 md:border-r">
                   <Space align="center">
                     <Avatar
                       size="small"
-                      style={{ backgroundColor: "#ecfdf5", color: "#16a34a" }}
+                      style={{ backgroundColor: "#16a34a", color: "#ffffff" }}
                       icon={<UserOutlined />}
                     />
-                    <Text strong>Persona Traits</Text>
+                    <Text strong className="text-base md:text-lg">
+                      Persona Traits
+                    </Text>
                   </Space>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {selectedPersona.traits.map((trait) => (
                       <Tag key={trait}>{trait}</Tag>
                     ))}
                   </div>
-                  <Text type="secondary" className="mt-2 block">
+                  <Text type="secondary" className="block leading-relaxed">
                     {selectedPersona.behaviorNotes}
                   </Text>
                 </div>
 
-                <div className="p-5">
+                <div className="flex flex-col gap-5 p-5">
                   <Space align="center">
                     <Avatar
                       size="small"
-                      style={{ backgroundColor: "#fff7ed", color: "#f59e0b" }}
-                      icon={<StarOutlined />}
+                      style={{ backgroundColor: "#f59e0b", color: "#ffffff" }}
+                      icon={<StarFilled />}
                     />
-                    <Text strong>Suggested Skill Focus</Text>
+                    <Text strong className="text-base md:text-lg">
+                      Suggested Skill Focus
+                    </Text>
                   </Space>
-                  <ul className="mt-3 list-disc space-y-1 pl-5">
+                  <ul className="list-disc space-y-2.5 pl-5 marker:text-amber-500 [&_li]:leading-relaxed [&_li]:text-sm [&_li]:text-zinc-700">
                     {selectedScenario.suggestedSkillFocus.map((skill) => (
                       <li key={skill}>{skill}</li>
                     ))}
@@ -315,14 +315,14 @@ export default function DashboardPage() {
           </Card>
 
           <Card
-            className="rounded-2xl border-indigo-100 !bg-indigo-50/70"
+            className="rounded-2xl border-brand-border !bg-brand-surface/70"
             styles={{ body: { padding: 16 } }}
           >
             <div className="flex items-center justify-between gap-3">
               <Space>
                 <Avatar
                   size="small"
-                  style={{ backgroundColor: "#eef2ff", color: "#6366f1" }}
+                  style={{ backgroundColor: "var(--brand-muted-bg)", color: "var(--brand-primary)" }}
                   icon={<InfoCircleOutlined />}
                 />
                 <Text>You can review your past sessions and feedback in History.</Text>

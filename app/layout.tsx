@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "antd/dist/reset.css";
+import AntdThemeProvider from "./antd-theme-provider";
 import "./globals.css";
 import RuntimeBootstrap from "./runtime-bootstrap";
 
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
-        <RuntimeBootstrap />
-        {children}
+        <AntdThemeProvider>
+          <RuntimeBootstrap />
+          {children}
+        </AntdThemeProvider>
       </body>
     </html>
   );

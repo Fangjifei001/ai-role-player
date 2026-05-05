@@ -42,10 +42,10 @@ Return your response in STRICT JSON only (no markdown fences, no commentary). Us
 
 Rules:
 - score is integer 0–100.
-- strengths: 2–4 strings.
-- improvements: 2–4 strings.
-- coachingTips: at least 3 items; each must be actionable and specific.
-- highlightMoments: at least 3 items; type only "good" or "bad"; message must quote or closely match a salesperson line; timestamp is seconds from session start (estimate order if unknown: 0, 60, 120, …).
+- strengths: 0–4 short strings grounded in the transcript. If the conversation is very short, one-sided, or has no clear wins, return an empty array []—do NOT invent praise. The app will show a supportive default if the array is empty.
+- improvements: 0–4 specific, actionable items tied to evidence. If nothing concrete stands out, return [] rather than vague filler; the app will add a gentle default.
+- coachingTips: prefer 3–5 items when possible; each must be actionable. If the transcript is too thin for five, still return as many good tips as you can (minimum 1 if you have any insight, otherwise []).
+- highlightMoments: 0–6 items; only include moments you can justify from the transcript. type only "good" or "bad"; message must quote or closely match a salesperson line; timestamp is seconds from session start (estimate order if unknown: 0, 45, 90, …). Prefer quality over quantity—omit rather than fabricate.
 
 Focus on:
 - objection handling
