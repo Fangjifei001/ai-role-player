@@ -31,7 +31,8 @@ Server APIs (not App Router pages):
 | `POST /api/session/chat` | Session chat: streams model text for the posted message list. |
 | `POST /api/feedback` | Builds sales-coach-style structured feedback JSON from a session snapshot. |
 
-## Local development
+## Setup & Run
+### Local development
 
 ```bash
 npm install
@@ -59,6 +60,9 @@ Quality checks:
 npm run lint
 npm run build
 ```
+
+### Production
+Visit Here[https://ai-role-player-rosy.vercel.app/]
 
 ## Tech stack
 
